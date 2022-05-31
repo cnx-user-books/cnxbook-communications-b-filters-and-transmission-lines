@@ -1,0 +1,141 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+
+  <title>Chebyshev Filters</title>
+
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>709b552a-928a-4900-aa2d-3af913d76add</md:uuid>
+</metadata>
+
+  <content>
+
+    <para id="para1">
+      This module will cover Chebyshev filters with an assumed
+      understanding of <link document="m10127" strength="2">Butterworth
+      filters</link>.  This module will also examine the lowpass
+      example of these filters, leaving conversion to other types of
+      filters for the <link document="LowpassHighpassTransformation" strength="2">Lowpass to Highpass
+      Transformation</link>, <link document="LowpassBandpassTransformation" strength="2">Lowpass to Bandpass
+      Transformation</link> and <link document="LowpassBandstopTransformation" strength="2">Lowpass to Bandstop
+      Transformation</link> modules.
+    </para>
+
+    <para id="para2">
+      Like Butterworth filters, Chebyshev filters contain only poles.
+      However, while the poles of the Butterworth filter lie on a
+      circle in the s-plane, those of the Chebyshev filter lie on an
+      <emphasis>ellipse</emphasis>.
+    </para>
+
+    <figure id="fig1">
+      <media id="idm2232992" alt=""><image src="../../media/chebyshev1.png" mime-type="image/png"/></media>
+      <caption>
+	A pole-zero plot of a lowpass Chebyshev filter The poles are
+	equally spaced around an ellipse in the left half of the
+	complex plane.</caption>
+    </figure>
+
+    <para id="para3">
+      The result of this repositioning of poles is a "rippling effect"
+      in the passband of the magnitude of the transfer function.
+      Since each local maximum in this rippling reaches the same value
+      and each local minimum reaches the same value, this rippling is
+      described as <term>equal ripple</term>.  It is important to
+      notice that there is no rippling in the stopband and to be aware
+      that this transition band will be narrower than a comparable
+      Butterworth filter.
+    </para>
+
+    <figure id="fig2">
+      <media id="idm9105968" alt=""><image src="../../media/chebyshev2.png" mime-type="image/png"/></media>
+      <caption>
+	A sketch of the magnitude of a lowpass Chebyshev filter.
+	Notice that the "equal rippling" in the passband and not in
+	the stopband.</caption>
+    </figure>
+
+    <para id="para4">
+      The magnitude of the transfer function of a Chebyshev filter
+      takes the form
+      <equation id="eqn1">
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:abs/>
+	      <m:apply>
+		<m:ci type="fn">H</m:ci>
+		<m:apply>
+		  <m:times/>
+		  <m:imaginaryi/>
+		  <m:ci>ω</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:divide/>
+	      <m:cn>1</m:cn>
+	      <m:apply>
+		<m:root/>
+		<m:apply>
+		  <m:plus/>
+		  <m:cn>1</m:cn>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>ε</m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		    <m:apply>
+		      <m:apply>
+			<m:power/>
+			<m:ci><m:msub>
+			    <m:mi>C</m:mi>
+			    <m:mi>n</m:mi>
+			  </m:msub></m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		      <m:ci>ω</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>
+      where the polynomial,
+      <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:ci type="fn"><m:msub>
+		<m:mi>C</m:mi>
+		<m:mi>n</m:mi>
+	      </m:msub></m:ci>
+	    <m:ci>ω</m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:cos/>
+	    <m:apply>
+	      <m:times/>
+	      <m:ci>n</m:ci>
+	      <m:apply>
+		<m:arccos/>
+		<m:ci>ω</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      is known as the <term>Chebyshev polynomial</term>.
+    </para>
+
+    <para id="para5">
+      The design of Chebyshev filters is generally done the same way
+      Butterworth filters are (with tables and Matlab).  The most
+      relevant Matlab command is <code>cheb1ap</code>, but
+      there are others.
+    </para>
+
+  </content>
+</document>

@@ -1,0 +1,495 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+
+  <title>Practical Filters</title>
+
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>e6f413d7-ea67-45f4-8ccd-1a63eed592b4</md:uuid>
+</metadata>
+
+  <content>
+
+    <para id="para1">
+      An <link document="m10103" strength="2">ideal filter</link> simply
+      removes all unwanted frequencies, preserving the remaining
+      frequencies exactly.  This would resemble some sort of a finite
+      rectangle function in frequency.  However, a simple, finite
+      rectangle function in frequency is an infinite sinc function in
+      time.  This is a problem.  A sinc function is an infinite length
+      signal in both the positive and negative directions, making it
+      impossible to create in the real-world.  This leads us to as
+      what would happen if we just made this sinc function causal by
+      "chopping it off" somewhere.  What we find when we do this is
+      that the frequency domain representation is no longer a perfect
+      rectangle: it now does not fall off immediately and shows some
+      wiggling where it was flat before.
+    </para>
+
+    <figure id="fig1" orient="horizontal">
+      <subfigure id="fig1a">
+	<media id="idm7710928" alt=""><image src="../../media/practical1.png" mime-type="image/png"/></media>
+	<caption>A truncated sinc function in time...</caption>
+      </subfigure>
+      <subfigure id="fig1b">
+	<media id="idm258880" alt=""><image src="../../media/practical2.png" mime-type="image/png"/></media>
+	<caption>
+	  ... leads to a smooth, wiggly, "rectangle" in
+	  frequency.</caption>
+      </subfigure>
+    </figure>
+
+    <section id="sect1">
+      <title>The Bands</title>
+      <para id="para2">
+	An ideal filter has two types of bands: the <term>stop
+	band</term> defines the region of frequencies that are
+	eliminated by the filter, while the <term>pass band</term>
+	defines the region of frequencies that the filter allows
+	through.  Practical filters add one more, the <term>transition
+	band</term>.  This is the area where the filter is moving
+	between the stop band and pass band.
+      </para>
+    </section>
+
+    <section id="sect2">
+      <title>Filter Design Specifications</title>
+      <para id="para3">
+	In our look at filter design specifications, we will use the
+	example of a lowpass filter.  The extension to the other kinds
+	of filters should be fairly straightforward.  <link target-id="fig2"/>
+	shows the parameters for a lowpass filter in the frequency
+	domain.
+      </para>
+
+      <figure id="fig2">
+	<media id="idp2627792" alt=""><image src="../../media/practical3.png" mime-type="image/png"/></media>
+      </figure>
+
+      <para id="para4">
+	From this image, the passband is the region from
+	<m:math>
+	  <m:apply>
+	    <m:minus/>
+	    <m:ci><m:msub>
+		<m:mi>ω</m:mi>
+		<m:mi>p</m:mi>
+	      </m:msub></m:ci>
+	  </m:apply>
+	</m:math>
+	to
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>ω</m:mi>
+	      <m:mi>p</m:mi>
+	    </m:msub></m:ci>
+	</m:math>,
+	the transition bands are the regions from
+	<m:math>
+	  <m:apply>
+	    <m:minus/>
+	    <m:ci><m:msub>
+		<m:mi>ω</m:mi>
+		<m:mi>s</m:mi>
+	      </m:msub></m:ci>
+	  </m:apply>
+	</m:math>
+	to
+	<m:math>
+	  <m:apply>
+	    <m:minus/>
+	    <m:ci><m:msub>
+		<m:mi>ω</m:mi>
+		<m:mi>p</m:mi>
+	      </m:msub></m:ci>
+	  </m:apply>
+	</m:math>
+	and from
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>ω</m:mi>
+	      <m:mi>p</m:mi>
+	    </m:msub></m:ci>
+	</m:math>
+	to
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>ω</m:mi>
+	      <m:mi>s</m:mi>
+	    </m:msub></m:ci>
+	</m:math>
+	while the stop band is the region less than
+	<m:math>
+	  <m:apply>
+	    <m:minus/>
+	    <m:ci><m:msub>
+		<m:mi>ω</m:mi>
+		<m:mi>s</m:mi>
+	      </m:msub></m:ci>
+	  </m:apply>
+	</m:math>
+	or greater than
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>ω</m:mi>
+	      <m:mi>s</m:mi>
+	    </m:msub></m:ci>
+	</m:math>.
+      </para>
+
+      <para id="para5">
+	In the figure above,
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>e</m:mi>
+	      <m:mi>p</m:mi>
+	    </m:msub></m:ci>
+	</m:math>
+	and
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>e</m:mi>
+	      <m:mi>s</m:mi>
+	    </m:msub></m:ci>
+	</m:math>
+	represent the acceptable tolerance (or error) around the
+	desired level that the passband and stopband respectively may
+	vary.  The behavior within the transition band is not
+	specified, allowing anything to occur there, as long as the
+	width is within specifications.
+      </para>
+
+      <example id="exa1">
+	<para id="para6">
+	  This example will look at a moving average system.
+	</para>
+	<figure id="fig3" orient="horizontal">
+	  <subfigure id="fig3a">
+	    <media id="idp1272864" alt=""><image src="../../media/practical4.png" mime-type="image/png"/></media>
+	    <caption>
+	      Time domain representation of the moving
+	      average.</caption>
+	  </subfigure>
+	  <subfigure id="fig3b">
+	    <media id="idm538800" alt=""><image src="../../media/practical5.png" mime-type="image/png"/></media>
+	    <caption>
+	      The frequency domain representation of the moving
+	      average system is a sinc function.
+	      <m:math>
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:ci type="fn">H</m:ci>
+		    <m:apply>
+		      <m:times/>
+		      <m:imaginaryi/>
+		      <m:ci>ω</m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:exp/>
+		      <m:apply>
+			<m:minus/>
+			<m:apply>
+			  <m:times/>
+			  <m:imaginaryi/>
+			  <m:ci>ω</m:ci>
+			  <m:apply>
+			    <m:divide/>
+			    <m:ci>T</m:ci>
+			    <m:cn>2</m:cn>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:divide/>
+		      <m:apply>
+			<m:sin/>
+			<m:apply>
+			  <m:times/>
+			  <m:ci>ω</m:ci>
+			  <m:apply>
+			    <m:divide/>
+			    <m:ci>T</m:ci>
+			    <m:cn>2</m:cn>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		      <m:apply>
+			<m:times/>
+			<m:ci>ω</m:ci>
+			<m:apply>
+			  <m:divide/>
+			  <m:ci>T</m:ci>
+			  <m:cn>2</m:cn>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	    </caption>
+	  </subfigure>
+	</figure>
+
+	<para id="para7">
+	  Some notes about this system:
+	  <list id="list1" list-type="bulleted">
+	    <item>It is lowpass</item>
+	    <item>
+	      It has linear phase with jumps of
+	      <m:math><m:pi/></m:math> radians when the sinc function
+	      changes sign </item>
+	    <item>
+	      The duration of the filter is inversely proportional to
+	      its bandwidth </item>
+	    <item>
+	      This filter is finite impulse response (FIR) </item>
+	    <item>
+	      It cannot be built with passive R, L, C circuits </item>
+	    <item>
+	      We do not have independent control over all four design
+	      specifications
+	    </item>
+	  </list>
+	</para>
+
+	<para id="para8">
+	  We are going to design a moving average filter with the
+	  following design specs:
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci><m:msub>
+		  <m:mi>ω</m:mi>
+		  <m:mi>p</m:mi>
+		</m:msub></m:ci>
+	      <m:apply>
+		<m:times/>
+		<m:cn>100</m:cn>
+		<m:pi/>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>,
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci><m:msub>
+		  <m:mi>e</m:mi>
+		  <m:mi>s</m:mi>
+		</m:msub></m:ci>
+	      <m:cn>0.1</m:cn>
+	    </m:apply>
+	  </m:math>,
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci><m:msub>
+		  <m:mi>e</m:mi>
+		  <m:mi>p</m:mi>
+		</m:msub></m:ci>
+	      <m:cn>0.1</m:cn>
+	    </m:apply>
+	  </m:math>
+	</para>
+
+	<figure id="fig4">
+	  <media id="idm6631328" alt=""><image src="../../media/practical6.png" mime-type="image/png"/></media>
+	</figure>
+
+	<para id="para9">
+	  With this specification, we are allowing
+	  <m:math>
+	    <m:ci><m:msub>
+		<m:mi>ω</m:mi>
+		<m:mi>s</m:mi>
+	      </m:msub></m:ci>
+	  </m:math>
+	  to be a dependant variable (since we need one).  We can now
+	  find the equation for this moving average system.
+	</para>
+
+	<para id="para10">
+	  We begin with
+	  <equation id="eqn1">
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:abs/>
+		  <m:apply>
+		    <m:ci type="fn">H</m:ci>
+		    <m:apply>
+		      <m:times/>
+		      <m:imaginaryi/>
+		      <m:ci>ω</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:cn>1.1</m:cn>
+		  <m:apply>
+		    <m:divide/>
+		    <m:apply>
+		      <m:sin/>
+		      <m:apply>
+			<m:times/>
+			<m:ci>ω</m:ci>
+			<m:apply>
+			  <m:divide/>
+			  <m:ci>T</m:ci>
+			  <m:cn>2</m:cn>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:times/>
+		      <m:ci>ω</m:ci>
+		      <m:apply>
+			<m:divide/>
+			<m:ci>T</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	  </equation>
+	  We will now solve for <m:math><m:ci>T</m:ci></m:math>
+	  with 
+	  <equation id="eqn2">
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:abs/>
+		  <m:apply>
+		    <m:ci type="fn">H</m:ci>
+		    <m:apply>
+		      <m:times/>
+		      <m:imaginaryi/>
+		      <m:cn>100</m:cn>
+		      <m:pi/>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:cn>1.1</m:cn>
+		  <m:apply>
+		    <m:divide/>
+		    <m:apply>
+		      <m:sin/>
+		      <m:apply>
+			<m:cn>50</m:cn>
+			<m:pi/>
+			<m:ci>T</m:ci>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:times/>
+		      <m:cn>50</m:cn>
+		      <m:pi/>
+		      <m:ci>T</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:cn>0.9</m:cn>
+	      </m:apply>
+	    </m:math>
+	  </equation>
+	  For these specs, 
+	  <m:math>
+	    <m:apply>
+	      <m:approx/>
+	      <m:ci>T</m:ci>
+	      <m:cn>0.007</m:cn>
+	    </m:apply>
+	  </m:math>.
+	  This means that
+	  <m:math>
+	    <m:apply>
+	      <m:abs/>
+	      <m:apply>
+		<m:ci type="fn">H</m:ci>
+		<m:apply>
+		  <m:times/>
+		  <m:imaginaryi/>
+		  <m:ci>ω</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  does not stay below
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci><m:msub>
+		  <m:mi>e</m:mi>
+		  <m:mi>s</m:mi>
+		</m:msub></m:ci>
+	      <m:cn>0.1</m:cn>
+	    </m:apply>
+	  </m:math>
+	  until
+	  <m:math>
+	    <m:apply>
+	      <m:approx/>
+	      <m:ci><m:msub>
+		  <m:mi>ω</m:mi>
+		  <m:mi>s</m:mi>
+		</m:msub></m:ci>
+	      <m:apply>
+		<m:times/>
+		<m:cn>771</m:cn>
+		<m:pi/>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>.
+	</para>
+
+	<figure id="fig5">
+	  <media id="idp2179264" alt=""><image src="../../media/practical7.png" mime-type="image/png"/></media>
+	  <caption>
+	    A graphical look at the transfer function of this lowpass
+	    filter with the passband and stopband noted.</caption>
+	</figure>
+
+	<para id="para11">
+	  It is very clear from this representation that the
+	  transition band is huge (
+	  <m:math>
+	    <m:apply>
+	      <m:times/>
+	      <m:cn>671</m:cn>
+	      <m:pi/>
+	    </m:apply>
+	  </m:math>).  This is a very bad filter, especially when you
+	  consider that it cannot be implemented with passive
+	  circuitry.  Fortunately better filters
+	  (<foreign>e.g.</foreign> <link document="m10127" strength="3">Butterworth</link>, <link document="m10104" strength="3">Chebyshev</link> and <link document="m10105" strength="3">Elliptical</link>) do exist.
+	</para>
+      </example>
+    </section>
+
+    <section id="sect3">
+      <title>Beyond Lowpass Filter Design</title>
+      <para id="para12">
+	In the discussion of the different filters (Butterworth,
+	Chebyshev and Elliptical) is common to see explanations based
+	on lowpass filters.  This explanation is very nice when first
+	learning about them, because it is sufficient to understand
+	the fundamentals of each of them.  It is acceptable, because
+	there exist fairly straightforward techniques to convert these
+	lowpass filters into highpass, bandpass or bandstop filters.
+	These techniques are the <link document="LowHighTransformation" strength="3">lowpass to highpass
+	transformation</link>, <link document="LowBandpassTransformation" strength="3">lowpass to bandpass
+	transformation</link> and <link document="LowBandstopTransformation" strength="3">lowpass to bandstop
+	transformation</link>.
+      </para>
+    </section>
+
+  </content>
+</document>

@@ -1,0 +1,831 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Telegrapher's Equation in Real Lines</title>
+
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>7a428a9e-c6dc-4b29-b6f3-bb796a803fe7</md:uuid>
+</metadata>
+
+  <content>
+
+    <para id="p1">
+      So far, the transmission lines we have looked at have been
+      "ideal".  That is they have been lossless and
+      dispersionless. Lest you leave the course with a false idea of
+      how things <emphasis>really</emphasis> work, we should go back
+      to our model and try to get things adjusted just a bit.
+    </para>
+
+    <para id="p2">
+      As you can probably imagine, a real transmission line is going
+      to have some series resistance, associated with the real losses
+      in the copper wire.  There may also be some shunt conductance,
+      if the insulating material holding the two conductors has some
+      leakage current.  We will need to include these effects along
+      with the distributed inductance and capacitance which we have
+      already talked about.  Fixing up the model accordingly, we now
+      draw a section of line 
+      <m:math display="inline">
+	<m:apply>
+	  <m:ci><m:mo>Δ</m:mo></m:ci>
+	  <m:ci>x</m:ci>
+	</m:apply>
+      </m:math>
+      long as shown in <link target-id="fig1" strength="2"/>.  Taking the
+      same voltage loop and current sum that we did back in the
+      discussion of <link document="m1043" strength="2">transmission
+      lines</link>, we come up with the following version of the
+      <term>telegrapher's equations</term>. 
+
+      <equation id="eq1">
+	<m:math> 
+	  <m:apply>
+	    <m:eq/> 
+	    <m:apply>
+	      <m:partialdiff/>
+	      <m:bvar><m:ci>x</m:ci></m:bvar>
+	      <m:apply>
+		<m:ci type="fn">V</m:ci>
+		<m:ci>x</m:ci>
+		<m:ci>t</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:minus/>
+	      <m:apply>
+		<m:times/>
+		<m:apply><m:minus/>
+		  <m:ci>R</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:ci type="fn">I</m:ci>
+		  <m:ci>x</m:ci>
+		  <m:ci>t</m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:ci>L</m:ci>
+		<m:apply>
+		  <m:partialdiff/>
+		  <m:bvar><m:ci>t</m:ci></m:bvar>
+		  <m:apply>
+		    <m:ci type="fn">I</m:ci>
+		    <m:ci>x</m:ci>
+		    <m:ci>t</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>
+      and
+      <equation id="eq2">
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:partialdiff/>
+	      <m:bvar><m:ci>x</m:ci></m:bvar>
+	      <m:apply>
+		<m:ci type="fn">I</m:ci>
+		<m:ci>x</m:ci>
+		<m:ci>t</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply><m:minus/>
+	      <m:apply><m:plus/>
+		<m:apply><m:times/>
+		  <m:ci>G</m:ci>
+		  <m:apply>
+		    <m:ci type="fn">V</m:ci>
+		    <m:ci>x</m:ci>
+		    <m:ci>t</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:apply><m:times/>
+		  <m:ci>C</m:ci>
+		  <m:apply><m:partialdiff/>
+		    <m:bvar><m:ci>t</m:ci></m:bvar>
+		    <m:apply>
+		      <m:ci type="fn">V</m:ci>
+		      <m:ci>x</m:ci>
+		      <m:ci>t</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>
+    </para>
+
+    <figure id="fig1">
+      <title>Real Line Diagram</title>
+      <media id="idp2223584" alt=""><image src="" mime-type="image"/></media>
+      <caption>A model for a line with losses.</caption>
+    </figure>
+
+    <para id="p3">
+      Clearly, we would like to simplify things if we can.  Let's
+      again make a sinusoidal time excitation assumption, and let 
+      <m:math>
+	<m:apply>
+	  <m:ci type="fn">I</m:ci>
+	  <m:ci>x</m:ci>
+	  <m:ci>t</m:ci>
+	</m:apply>
+      </m:math> and 
+      <m:math>
+	<m:apply>
+	  <m:ci type="fn">V</m:ci>
+	  <m:ci>x</m:ci>
+	  <m:ci>t</m:ci>
+	</m:apply>
+      </m:math> become phasors.  Since the time variation is now
+      represented by a simple 
+      <m:math>
+	<m:apply>
+	  <m:exp/>
+	  <m:apply>
+	    <m:times/>
+	    <m:imaginaryi/>
+	    <m:ci>ω</m:ci>
+	    <m:ci>L</m:ci>
+	  </m:apply>
+	</m:apply> 
+      </m:math> the time derivatives become just
+      <m:math>
+	<m:apply>
+	  <m:times/>
+	  <m:imaginaryi/>
+	  <m:ci>ω</m:ci>
+	</m:apply>
+      </m:math>.  We have 
+      <equation id="eq3">
+	<m:math> 
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:partialdiff/> 
+	      <m:bvar><m:ci>x</m:ci></m:bvar>
+	      <m:apply>
+		<m:ci type="fn">V</m:ci>
+		<m:ci>x</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply><m:minus/>
+	      <m:apply><m:times/>
+		<m:apply><m:plus/>
+		  <m:ci>R</m:ci>
+		  <m:apply><m:times/>
+		    <m:imaginaryi/>
+		    <m:ci>ω</m:ci>
+		    <m:ci>L</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:ci type="fn">I</m:ci>
+		  <m:ci>x</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation> and 
+      <equation id="eq4">
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:partialdiff/>
+	      <m:bvar><m:ci>x</m:ci></m:bvar>
+	      <m:apply>
+		<m:ci type="fn">I</m:ci>
+		<m:ci>x</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply><m:minus/>
+	      <m:apply><m:times/>
+		<m:apply><m:plus/>
+		  <m:ci>G</m:ci>
+		  <m:apply><m:times/>
+		    <m:imaginaryi/>
+		    <m:ci>ω</m:ci>
+		    <m:ci>C</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:ci type="fn">V</m:ci>
+		  <m:ci>x</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>
+    </para>
+
+    <para id="p4">
+      The way to get a solution is, of course, just like we have
+      always done.  Take the derivative with respect to
+      <m:math><m:ci>x</m:ci></m:math> of <link target-id="eq3" strength="2"/> 
+      <equation id="eq5">
+	<m:math>
+	  <m:apply>
+	    <m:eq/> 
+	    <m:apply>
+	      <m:partialdiff/>
+	      <m:bvar>
+		<m:ci>x</m:ci>
+		<m:degree><m:cn>2</m:cn></m:degree>
+	      </m:bvar>
+	      <m:apply>
+		<m:ci type="fn">V</m:ci>
+		<m:ci>x</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply><m:minus/>
+	      <m:apply><m:times/>
+		<m:apply><m:plus/>
+		  <m:ci>R</m:ci>
+		  <m:apply><m:times/>
+		    <m:imaginaryi/>
+		    <m:ci>ω</m:ci>
+		    <m:ci>L</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:apply><m:partialdiff/>
+		  <m:bvar><m:ci>x</m:ci></m:bvar>
+		  <m:apply>
+		    <m:ci type="fn">I</m:ci>
+		    <m:ci>x</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation> and then plug in <link target-id="eq4" strength="3"/>
+ 
+      <equation id="eq6">
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:partialdiff/>
+	      <m:bvar>
+		<m:ci>x</m:ci>
+		<m:degree><m:cn>2</m:cn></m:degree>
+	      </m:bvar>
+	      <m:apply>
+		<m:ci type="fn">V</m:ci>
+		<m:ci>x</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply><m:times/>
+	      <m:apply><m:plus/>
+		<m:ci>R</m:ci>
+		<m:apply><m:times/>
+		  <m:imaginaryi/>
+		  <m:ci>ω</m:ci>
+		  <m:ci>L</m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply><m:plus/>
+		<m:ci>G</m:ci>
+		<m:apply><m:times/>
+		  <m:imaginaryi/>
+		  <m:ci>ω</m:ci>
+		  <m:ci>C</m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:ci type="fn">V</m:ci>
+		<m:ci>x</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>
+    </para>
+
+    <para id="p5">
+      The obvious solution to this (See how easy this gets after
+      you've done it once or twice) is 
+      <equation id="eq7">
+	<m:math>
+	  <m:apply>
+	    <m:eq/> 
+	    <m:apply>
+	      <m:ci type="fn">V</m:ci>
+	      <m:ci>x</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:ci><m:msub>
+		  <m:mi>V</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub></m:ci>
+	      <m:apply>
+		<m:exp/>
+		<m:apply>
+		  <m:ci><m:mo>±</m:mo></m:ci>
+		  <m:apply>
+		    <m:times/> 
+		    <m:ci>γ</m:ci> 
+		    <m:ci>x</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation> with 
+      <equation id="eq8">
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci>γ</m:ci>
+	    <m:apply>
+	      <m:root/>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:plus/>
+		  <m:ci>R</m:ci>
+		  <m:apply>
+		    <m:times/>
+		    <m:imaginaryi/>
+		    <m:ci>ω</m:ci>
+		    <m:ci>L</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:plus/>
+		  <m:ci>G</m:ci>
+		  <m:apply><m:times/>
+		    <m:imaginaryi/>
+		    <m:ci>ω</m:ci>
+		    <m:ci>C</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>
+    </para>
+
+    <para id="p6">
+      This number, <m:math><m:ci>γ</m:ci></m:math> is called
+      <term> the complex propagation constant</term>.  Obviously, in
+      general, it will have both a real and an imaginary part:
+
+      <equation id="eq9">
+	<m:math> 
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci>γ</m:ci> 
+	    <m:apply>
+	      <m:plus/> 
+	      <m:ci>α</m:ci>
+	      <m:apply>
+		<m:times/> 
+		<m:imaginaryi/> 
+		<m:ci>β</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation> and we have 
+
+      <equation id="eq10">
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:ci type="fn">V</m:ci>
+	      <m:ci>x</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:ci><m:msub>
+		  <m:mi>V</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub></m:ci>
+	      <m:apply>
+		<m:exp/>
+		<m:apply>
+		  <m:ci><m:mo>±</m:mo></m:ci>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:plus/>
+		      <m:ci>α</m:ci>
+		      <m:apply>
+			<m:times/>
+			<m:imaginaryi/>
+			<m:ci>β</m:ci>
+		      </m:apply>
+		    </m:apply>
+		    <m:ci>x</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>  
+
+      Let's choose the minus sign in the exponent, and write the two
+      terms as a product.
+
+      <equation id="eq11">
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:ci type="fn">V</m:ci>
+	      <m:ci>x</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:ci><m:msub>
+		  <m:mi>V</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub></m:ci>
+	      <m:apply>
+		<m:exp/>
+		<m:apply>
+		  <m:minus/>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci>α</m:ci>
+		    <m:ci>x</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:exp/>
+		<m:apply>
+		  <m:minus/>
+		  <m:apply>
+		    <m:times/>
+		    <m:imaginaryi/>
+		    <m:ci>β</m:ci>
+		    <m:ci>x</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>
+
+      We see we have something similar to what we had before, but with
+      just a minor difference.  The
+      <m:math>
+	<m:apply>
+	  <m:exp/>
+	  <m:apply>
+	    <m:minus/>
+	    <m:apply>
+	      <m:times/>
+	      <m:imaginaryi/>
+	      <m:ci>β</m:ci>
+	      <m:ci>x</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math> term is the propagating term which tells us how the
+      phase angle of the phasor changes as we move along the line, and
+      acts just like the <m:math><m:ci>β</m:ci></m:math> term we
+      had before.  Thus
+      <equation id="eq12">
+	<m:math>
+	  <m:apply><m:eq/>
+	    <m:ci>β</m:ci>
+	    <m:apply><m:divide/>
+	      <m:apply><m:times/>
+		<m:cn>2</m:cn>
+		<m:pi/>
+	      </m:apply>
+	      <m:ci>λ</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation> and 
+
+      <equation id="eq13">
+	<m:math>
+	  <m:apply><m:eq/>
+	    <m:ci><m:msub>
+		<m:mi>ν</m:mi>
+		<m:mi>p</m:mi>
+	      </m:msub></m:ci>
+	    <m:apply><m:divide/>
+	      <m:ci>ω</m:ci>
+	      <m:ci>β</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>
+    </para>
+
+    <para id="p7">
+      The <m:math><m:ci>α</m:ci></m:math> is called the
+      <term>attenuation coefficient</term>, and obviously, the 
+      <m:math>
+	<m:apply>
+	  <m:exp/>
+	  <m:apply>
+	    <m:minus/>
+	    <m:apply>
+	      <m:times/>
+	      <m:ci>α</m:ci>
+	      <m:ci>x</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math> term in <link target-id="eq11" strength="2"/> causes the
+      amplitude of the wave to decrease as it moves down the line.
+      <link target-id="fig2" strength="2"/> is a sketch of what a wave
+      would look like if it is both propagating down the transmission
+      line and also being attenuated.  In a distance
+      <m:math>
+	<m:apply>
+	  <m:divide/>
+	  <m:cn>1</m:cn>
+	  <m:ci>α</m:ci>
+	</m:apply>
+      </m:math> the amplitude of the propagating wave has fallen to 
+      <m:math>
+	<m:apply>
+	  <m:exp/>
+	  <m:cn>-1</m:cn>
+	</m:apply>
+      </m:math> of the value it had when it started.
+    </para>
+
+    <figure id="fig2">
+      <title>Wave Decay</title>
+      <media id="idp1852192" alt=""><image src="" mime-type="image"/></media>
+      <caption>
+	Sketch of a decaying wave on a transmission line.</caption>
+    </figure>
+
+    <para id="p8">
+      Let's take the minus sign solution in <link target-id="eq7" strength="2"/> and substitute back into <link target-id="eq3" strength="2"/>
+      <equation id="eq14">
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:partialdiff/>
+	      <m:bvar><m:ci>x</m:ci></m:bvar>
+	      <m:apply>
+		<m:ci type="fn">V</m:ci>
+		<m:ci>x</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply><m:minus/>
+	      <m:apply><m:times/>
+		<m:ci>γ</m:ci>
+		<m:ci><m:msub>
+		    <m:mi>V</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub></m:ci>
+		<m:apply>
+		  <m:exp/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:times/>
+		      <m:ci>γ</m:ci>
+		      <m:ci>x</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply><m:minus/>
+	      <m:apply><m:times/>
+		<m:apply><m:plus/>
+		  <m:ci>R</m:ci>
+		  <m:apply><m:times/>
+		    <m:imaginaryi/>
+		    <m:ci>ω</m:ci>
+		    <m:ci>L</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:ci type="fn">I</m:ci>
+		  <m:ci>x</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation> From which we get 
+
+      <equation id="eq15">
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:ci type="fn">I</m:ci>
+	      <m:ci>x</m:ci>
+	    </m:apply>
+	    <m:apply><m:times/>
+	      <m:apply><m:divide/>
+		<m:ci>γ</m:ci>
+		<m:apply><m:plus/>
+		  <m:ci>R</m:ci>
+		  <m:apply><m:times/> 
+		    <m:imaginaryi/>
+		    <m:ci>ω</m:ci>
+		    <m:ci>L</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:ci><m:msub>
+		  <m:mi>V</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub></m:ci>
+	      <m:apply><m:exp/>
+		<m:apply><m:minus/>
+		  <m:apply><m:times/>
+		    <m:ci>γ</m:ci>
+		    <m:ci>x</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply><m:times/>
+	      <m:apply><m:divide/>
+		<m:apply><m:root/>
+		  <m:apply><m:times/>
+		    <m:apply><m:plus/>
+		      <m:ci>R</m:ci>
+		      <m:apply><m:times/> 
+			<m:imaginaryi/>
+			<m:ci>ω</m:ci>
+			<m:ci>L</m:ci>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply><m:plus/>
+		      <m:ci>G</m:ci>
+		      <m:apply><m:times/> 
+			<m:imaginaryi/>
+			<m:ci>ω</m:ci>
+			<m:ci>C</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply><m:plus/>
+		  <m:ci>R</m:ci>
+		  <m:apply><m:times/> 
+		    <m:imaginaryi/>
+		    <m:ci>ω</m:ci>
+		    <m:ci>L</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:ci type="fn">V</m:ci>
+		<m:ci>x</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply><m:times/>
+	      <m:apply><m:root/>
+		<m:apply><m:divide/>
+		  <m:apply><m:plus/>
+		    <m:ci>G</m:ci>
+		    <m:apply><m:times/> 
+		      <m:imaginaryi/>
+		      <m:ci>ω</m:ci>
+		      <m:ci>C</m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply><m:plus/>
+		    <m:ci>R</m:ci>
+		    <m:apply><m:times/> 
+		      <m:imaginaryi/>
+		      <m:ci>ω</m:ci>
+		      <m:ci>L</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:ci type="fn">V</m:ci>
+		<m:ci>x</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation> Thus we can say 
+
+      <equation id="eq16">
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:ci type="fn">V</m:ci>
+	      <m:ci>x</m:ci>
+	    </m:apply>
+	    <m:apply><m:times/>
+	      <m:ci><m:msub>
+		  <m:mi>Z</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub></m:ci>
+	      <m:apply>
+		<m:ci type="fn">I</m:ci>
+		<m:ci>x</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation> where 
+
+      <equation id="eq17">
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci><m:msub>
+		<m:mi>Z</m:mi>
+		<m:mn>0</m:mn>
+	      </m:msub></m:ci>
+	    <m:apply><m:root/>
+	      <m:apply><m:divide/>
+		<m:apply><m:plus/>
+		  <m:ci>R</m:ci>
+		  <m:apply><m:times/> 
+		    <m:imaginaryi/>
+		    <m:ci>ω</m:ci>
+		    <m:ci>L</m:ci>
+		  </m:apply>         
+		</m:apply>
+		<m:apply><m:plus/>
+		  <m:ci>G</m:ci>
+		  <m:apply><m:times/> 
+		    <m:imaginaryi/>
+		    <m:ci>ω</m:ci>
+		    <m:ci>C</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply><m:plus/>
+	      <m:ci><m:msub>
+		  <m:mi>R</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub></m:ci>
+	      <m:apply><m:times/>
+		<m:imaginaryi/>
+		<m:ci><m:msub>
+		    <m:mi>X</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>
+    </para>
+
+    <para id="p9">
+      In general, in order to find
+      <m:math><m:ci>α</m:ci></m:math>,
+      <m:math><m:ci>β</m:ci></m:math>,
+      <m:math>
+	<m:ci><m:msub>
+	    <m:mi>R</m:mi>
+	    <m:mn>0</m:mn>
+	  </m:msub></m:ci>
+      </m:math>
+      , and
+      <m:math>
+	<m:ci><m:msub>
+	    <m:mi>X</m:mi>
+	    <m:mn>0</m:mn>
+	  </m:msub></m:ci>
+      </m:math>
+      , we would have to find the square root given in <link target-id="eq8" strength="2"/> and <link target-id="eq17" strength="2"/> for specific values of
+      <m:math><m:ci>R</m:ci></m:math>,
+      <m:math><m:ci>L</m:ci></m:math>,
+      <m:math><m:ci>G</m:ci></m:math>, and
+      <m:math><m:ci>C</m:ci></m:math>.  On the other hand, we could
+      maybe come up with some reasonable approximations which might
+      suffice for cases of real interest. Obviously, if a line is very
+      lossy, we would not be very interested in using it, and so
+      except in some very special cases where an extremely lossy line
+      is unavoidable (usually having to do with signals at very high
+      frequencies) we might see if we can find a <term>low loss</term>
+      approximation.
+    </para>
+
+  </content>
+</document>
