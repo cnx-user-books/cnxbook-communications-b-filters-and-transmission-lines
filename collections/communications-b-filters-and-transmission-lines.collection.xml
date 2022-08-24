@@ -1,103 +1,40 @@
-<col:collection xmlns="http://cnx.rice.edu/collxml" xmlns:md="http://cnx.rice.edu/mdml" xmlns:col="http://cnx.rice.edu/collxml" xmlns:cnxml="http://cnx.rice.edu/cnxml" xml:lang="en" type="Course">
+<?xml version="1.0"?>
+<col:collection xmlns="http://cnx.rice.edu/collxml" xmlns:md="http://cnx.rice.edu/mdml" xmlns:col="http://cnx.rice.edu/collxml" xmlns:cnxml="http://cnx.rice.edu/cnxml" xml:lang="en" type="Course" authors="James Flint">
   <metadata xmlns:md="http://cnx.rice.edu/mdml" mdml-version="0.5">
-  <md:content-id>col11169</md:content-id>
-  <md:title>Communications B : Filters and Transmission Lines</md:title>
-  
-  
-  <md:license url="http://creativecommons.org/licenses/by/3.0/"/>
-  <md:language>en</md:language>
-
-  
-
-  
-  
-  <md:uuid>9c36e76d-ed3f-400d-bb16-8ad567d8b01c</md:uuid>
-<md:slug>communications-b-filters-and-transmission-lines</md:slug>
-</metadata>
-
+    <md:content-id>col11169</md:content-id>
+    <md:title>Communications B : Filters and Transmission Lines</md:title>
+    <md:license url="http://creativecommons.org/licenses/by/3.0/"/>
+    <md:language>en</md:language>
+    <md:uuid>9c36e76d-ed3f-400d-bb16-8ad567d8b01c</md:uuid>
+    <md:slug>communications-b-filters-and-transmission-lines</md:slug>
+  </metadata>
   <col:content>
-    
-      
-        
-      <col:subcollection>
-        <md:title>Transmission Lines</md:title>
-        
-        
-        
-
-        <col:content>
-          
-    
-      <col:module document="m11373"/>
-        
-      
-    
-    
-      <col:module document="m1046"/>
-        
-      
-    
-    
-      <col:module document="m11374"/>
-        
-      
-    
-    
-      <col:module document="m10095"/>
-        
-      
-    
-    
-      <col:module document="m11382"/>
-        
-      
-    
-    
-      <col:module document="m11378"/>
-        
-      
-    
-        </col:content>
-      </col:subcollection>
-    
-    
-      
-        
-      <col:subcollection>
-        <md:title>Filters</md:title>
-        
-        
-        
-
-        <col:content>
-          
-    
-      <col:module document="m10126"/>
-        
-      
-    
-    
-      <col:module document="m10127">
-        <col:featured-links>
-          
+    <col:subcollection>
+      <md:title>Transmission Lines</md:title>
+      <col:content>
+        <col:module document="m11373"/>
+        <col:module document="m1046"/>
+        <col:module document="m11374"/>
+        <col:module document="m10095"/>
+        <col:module document="m11382"/>
+        <col:module document="m11378"/>
+      </col:content>
+    </col:subcollection>
+    <col:subcollection>
+      <md:title>Filters</md:title>
+      <col:content>
+        <col:module document="m10126"/>
+        <col:module document="m10127">
+          <col:featured-links>
             <cnxml:link-group type="supplemental">
               <cnxml:link url="http://www.mathworks.com/access/helpdesk/help/toolbox/filterdesign/filterdesign.shtml">Matlab filter design toolbox</cnxml:link>
               <cnxml:link url="http://dsp.rice.edu/software/rufilter.shtml">Rice DSP Group filter design software</cnxml:link>
               <cnxml:link url="http://sine.ni.com/nips/cds/view/p/lang/en/nid/14890">NI LabVIEW Digital Filter Design Toolkit</cnxml:link>
             </cnxml:link-group>
-          
-        </col:featured-links>
-      </col:module>
-        
-      
-    
-    
-      <col:module document="m10104"/>
-        
-      
-    
-        </col:content>
-      </col:subcollection>
-    
+          </col:featured-links>
+        </col:module>
+        <col:module document="m10104"/>
+      </col:content>
+    </col:subcollection>
   </col:content>
 </col:collection>
